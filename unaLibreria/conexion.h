@@ -17,5 +17,6 @@
 #include<unistd.h>
 
 void loggear();
-
+int enviar_contenido(void* contenido, uint32_t bytes_a_enviar,int receptor);
+void* recibir_contenido(int emisor);
 #endif /* CONEXION_H_ */

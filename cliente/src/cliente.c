@@ -15,9 +15,10 @@
 #include <sys/socket.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include<netdb.h>
-#include<string.h>
-#include<unistd.h>
+#include <netdb.h>
+#include <string.h>
+#include <unistd.h>
+#include <conexion.h>
 
 int crear_conexion(char *ip, char* puerto){
 	struct addrinfo hints;
@@ -37,23 +38,16 @@ int crear_conexion(char *ip, char* puerto){
 	return socket_cliente;
 }
 int main(void) {
-//	struct sockaddr_in direccionServer;
-//	direccionServer.sin_family=AF_INET;
-//	direccionServer.sin_addr.s_addr=INADDR_ANY;
-//	direccionServer.sin_port=htons(8080);
-//	int socket_cliente=socket(AF_INET,SOCK_STREAM,0);
-//	if (connect(socket_cliente,(void*)&direccionServer,sizeof(direccionServer))!=0) {
-//		perror("No se pudo conectar ");
-//		return 1 ;
-//	}
 	int socket_cliente = crear_conexion("127.0.0.1","4445");
 	if(socket_cliente==-1)return EXIT_FAILURE;
 	for (;;) {
 
 		char* mensaje=readline("-> ");
-		int size_del_mensaje = strlen(mensaje);
-		send(socket_cliente,&size_del_mensaje,sizeof(int),0);
-		send(socket_cliente,mensaje,strlen(mensaje),0);
+//		int size_del_mensaje = strlen(mensaje);
+//		send(socket_cliente,&size_del_mensaje,sizeof(int),0);
+//		send(socket_cliente,mensaje,strlen(mensaje),0);
+		enviar_contenido(mensaje,strlen(mensaje)+1,socket_cliente);
+		free(mensaje);
 	}
 	return EXIT_SUCCESS;
 }

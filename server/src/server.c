@@ -57,22 +57,29 @@ int main(void) {
 	send(cliente,mensaje,sizeof(mensaje),0);
 	send(cliente,otroMensaje,sizeof(otroMensaje),0);
 //------------------------------------
-	char* buffer =NULL;
 	while(1){
-		int size_mensaje=-1;
-		int bytesRecibidos=recv(cliente,&size_mensaje,sizeof(int),0);
-		if(bytesRecibidos<0 || size_mensaje==-1){
-			perror("error al recibir size del mensaje o se desconecto");
-			return EXIT_FAILURE;
+//		char* buffer =NULL;
+//		int size_mensaje=-1;
+//		int bytesRecibidos=recv(cliente,&size_mensaje,sizeof(uint32_t),0);
+//		if(bytesRecibidos<0 || size_mensaje==-1){
+//			perror("error al recibir size del mensaje o se desconecto");
+//			return EXIT_FAILURE;
+//		}
+//		buffer=malloc(size_mensaje);
+//		bytesRecibidos=recv(cliente,buffer,size_mensaje,0);
+//		if (bytesRecibidos<0)perror("Nada recibido");
+//		if(bytesRecibidos==0)perror("mensaje recibido vacio");
+////		buffer[bytesRecibidos]='\0';
+//		printf("Llegaron %d bytes como  : %s y longitud %d \n",bytesRecibidos,buffer,size_mensaje);
+//		free(buffer);
+
+		char* carta = (void*)recibir_contenido(cliente);
+		if(carta==NULL){
+			perror("cliente se desconecto.");
+			break;
 		}
-		buffer=malloc(size_mensaje);
-		bytesRecibidos=recv(cliente,buffer,size_mensaje,0);
-		if (bytesRecibidos<0)perror("Nada recibido");
-		if(bytesRecibidos==0)perror("mensaje recibido vacio");
-//		buffer[bytesRecibidos]='\0';
-		printf("Llegaron %d bytes como  : %s y longitud %d \n",bytesRecibidos,buffer,size_mensaje);
+		free(carta);
 	}
-	free(buffer);
 	return EXIT_SUCCESS;
 
 }
