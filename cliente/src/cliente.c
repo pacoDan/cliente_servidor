@@ -40,6 +40,9 @@ int crear_conexion(char *ip, char* puerto){
 int main(void) {
 	int socket_cliente = crear_conexion("127.0.0.1","4445");
 	if(socket_cliente==-1)return EXIT_FAILURE;
+	char * recibir_Saludo = recibir_contenido(socket_cliente);
+	//puts(recibir_Saludo);
+	free(recibir_Saludo);
 	for (;;) {
 
 		char* mensaje=readline("-> ");

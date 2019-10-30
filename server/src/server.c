@@ -53,9 +53,10 @@ int main(void) {
 	unsigned int tamanioDireccion;
 	int cliente = accept(server,(void*)(&direcionCliente),&tamanioDireccion);
 	printf("Recibi una conexion, fd de cliente es  %d !!\n",cliente);
-	char mensaje[] = "Hola Cliente",otroMensaje[]="como va";
-	send(cliente,mensaje,sizeof(mensaje),0);
-	send(cliente,otroMensaje,sizeof(otroMensaje),0);
+	char mensaje[] = "Hola Cliente soy server",otroMensaje[]="como va";
+//	send(cliente,mensaje,sizeof(mensaje),0);
+//	send(cliente,otroMensaje,sizeof(otroMensaje),0);
+	enviar_contenido(mensaje,sizeof(mensaje)+1,cliente);
 //------------------------------------
 	while(1){
 //		char* buffer =NULL;
