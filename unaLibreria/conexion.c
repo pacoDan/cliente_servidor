@@ -7,5 +7,5 @@
 #include "conexion.h"
 
 void loggear(){
-	puts("Hola");
+	puts("Hola !!");
 }

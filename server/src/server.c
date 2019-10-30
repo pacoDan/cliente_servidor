@@ -17,6 +17,8 @@
 #include<string.h>
 #include<unistd.h>
 
+#include <conexion.h>
+
 int iniciar_servidor(const char* _SERVER_IP,const char* _SERVER_PUERTO){// parece ok
 	int socket_servidor;
     struct addrinfo hints, *servinfo, *p;
@@ -43,6 +45,7 @@ int iniciar_servidor(const char* _SERVER_IP,const char* _SERVER_PUERTO){// parec
 }
 
 int main(void) {
+	loggear();
 	int server = iniciar_servidor("127.0.0.1","4445");
 	puts("Estoy escuchando");
 	//-------------------------------------
